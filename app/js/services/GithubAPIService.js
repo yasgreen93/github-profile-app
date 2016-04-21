@@ -1,6 +1,6 @@
 angular
   .module('githubProfileApp')
-  .service('GithubAPIService', function($http, userFactory) {
+  .service('GithubAPIService', ['$http', 'userFactory', function($http, userFactory) {
 
     var self = this;
 
@@ -25,4 +25,4 @@ angular
         return user;
       });
     }
-  });
+  }]);
