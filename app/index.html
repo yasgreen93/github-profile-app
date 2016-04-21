@@ -15,7 +15,7 @@
       <ul ng-repeat="user in ctrl.users | filter:search">
         <li>
           <ul>
-            Avatar: {{ user.avatar }}
+            <img src="{{ user.avatar }}">
             <li>{{ user.username }}</li>
             <li>Repositories: {{ user.numOfRepos }}</li>
             <li>Followers: {{ user.numOfFollowers }}</li>
