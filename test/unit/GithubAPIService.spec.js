@@ -3,8 +3,11 @@ describe('GithubAPIService', function(){
 
   var GithubAPIService, httpBackend;
 
-  var usersData = [{ id: 1, login: 'kyle', repos_url: 4, followers_url: 0, avatar_url: 'kyle.png' },
-                   { id: 2, login: 'harsheet', repos_url: 10, followers_url: 2, avatar_url: 'harsheet.png' }];
+  var usersData = [{ id: 1, login: 'kyle', avatar_url: 'kyle.png' },
+                   { id: 2, login: 'harsheet', avatar_url: 'harsheet.png' }];
+
+  var user1Info = { followers: 0, public_repos: 4 };
+  var user2Info = { followers: 2, public_repos: 10 };
 
   beforeEach(inject(function(_GithubAPIService_,_userFactory_,$httpBackend) {
     GithubAPIService = _GithubAPIService_;
@@ -13,7 +16,10 @@ describe('GithubAPIService', function(){
   }));
 
   it('fetches a list of users', function(){
-    httpBackend.expectGET("https://api.github.com/users").respond(usersData);
+    httpBackend.expectGET("https://api.github.com/users?access_token=3444a3707c527571bed704e5df863f35a523f78d").respond(usersData);
+    httpBackend.expectGET("https://api.github.com/users/kyle?access_token=3444a3707c527571bed704e5df863f35a523f78d").respond(user1Info);
+    httpBackend.expectGET("https://api.github.com/users/harsheet?access_token=3444a3707c527571bed704e5df863f35a523f78d").respond(user2Info);
+
 
     var user1 = new userFactory();
     user1.userId = 1;

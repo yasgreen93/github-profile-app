@@ -10,7 +10,7 @@ describe('GithubProfileController', function() {
     userFactory = _userFactory_;
     httpBackend = $httpBackend;
 
-    httpBackend.expectGET("https://api.github.com/users").respond(usersData);
+    httpBackend.expectGET("https://api.github.com/users?access_token=3444a3707c527571bed704e5df863f35a523f78d").respond(usersData);
     httpBackend.flush();
   }));
 
@@ -30,5 +30,9 @@ describe('GithubProfileController', function() {
     user2.avatar = 'harsheet.png';
 
     expect(ctrl.users).toEqual([user1, user2]);
+  });
+
+  it('gets search text on each keystroke', function() {
+    expect(ctrl.getSearchText('kyle')).toEqual(usersData[0])
   });
 });

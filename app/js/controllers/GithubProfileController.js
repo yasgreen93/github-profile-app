@@ -9,4 +9,9 @@ angular
       self.users = users;
     });
 
+    self.search = function(searchText) {
+      GithubAPIService.getUsers(searchText).then(function(users) {
+        self.users = users;
+    })};
+
   }]);

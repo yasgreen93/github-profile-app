@@ -4,7 +4,7 @@ angular
 
     var self = this;
 
-    var accessToken = '?access_token=2a001e11cc660e1d60f4a32a0a8f738a5aecaec9'
+    var accessToken = '?access_token=3444a3707c527571bed704e5df863f35a523f78d'
 
     self.getUsers = function() {
       return $http.get('https://api.github.com/users' + accessToken)
@@ -16,13 +16,15 @@ angular
     function _handleResponseFromAPI(data) {
       return data.map(function(userData) {
         var user = new userFactory();
+
         user.userId = userData.id;
         user.username = userData.login;
+        user.avatar = userData.avatar_url;
+
 
         _getUserInfo(user, userData.login);
 
-        user.avatar = userData.avatar_url;
-
+        console.log(user);
         return user;
       });
     };
@@ -32,6 +34,8 @@ angular
       .then(function(response) {
         user.numOfFollowers = response.data.followers;
         user.numOfRepos = response.data.public_repos;
+        console.log("This should come first")
+        console.log(user);
       });
     };
 
