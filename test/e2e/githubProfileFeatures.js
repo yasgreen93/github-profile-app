@@ -26,15 +26,15 @@ describe('Github Profile App', function() {
   it('displays a list of users', function() {
     browser.get('/');
     var users = $$("#users ul li ul");
-    expect(users.first().getText()).toMatch("Avatar: kyle.png\nkyle\nRepositories: 4\nFollowers: 0");
-    expect(users.last().getText()).toMatch("Avatar: harsheet.png\nharsheet\nRepositories: 10\nFollowers: 2");
+    expect(users.first().getText()).toMatch("kyle\nRepositories: 4\nFollowers: 0");
+    expect(users.last().getText()).toMatch("harsheet\nRepositories: 10\nFollowers: 2");
   });
 
   it('searches user by username and returns the user', function() {
     browser.get('/');
     $("#search-by-username").sendKeys("kyle");
     var users = $$("#users ul li ul");
-    expect(users.getText()).toMatch("Avatar: kyle.png\nkyle\nRepositories: 4\nFollowers: 0");
-    expect(users.getText()).not.toMatch("Avatar: harsheet.png\nharsheet\nRepositories: 10\nFollowers: 2");
+    expect(users.getText()).toMatch("kyle\nRepositories: 4\nFollowers: 0");
+    expect(users.getText()).not.toMatch("harsheet\nRepositories: 10\nFollowers: 2");
   });
 });
