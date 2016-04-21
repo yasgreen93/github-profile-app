@@ -1,20 +1,25 @@
 angular
   .module('githubProfileApp')
-  .controller('GithubProfileController', ['userFactory', function(userFactory) {
+  .controller('GithubProfileController', ['$http', 'GithubAPIService', 'userFactory', function($http, GithubAPIService, userFactory) {
 
     var self = this;
     var user1, user2;
 
-    self.users = [user1 = new userFactory(), user2 = new userFactory()];
+    GithubAPIService.getUsers().then(function(users) {
+      self.users = users;
+    });
 
-    user1.username = 'kyle';
-    user1.numOfRepos = 10;
-    user1.numOfFollowers = 20;
-    user1.avatar = 'kyle.jpg';
-
-    user2.username = 'harsheet';
-    user2.numOfRepos = 18;
-    user2.numOfFollowers = 23;
-    user2.avatar = 'harsheet.jpg';
-
+    // self.users = [user1 = new userFactory(), user2 = new userFactory()];
+    //
+    // user1.userId = 1;
+    // user1.username = 'kyle';
+    // user1.numOfRepos = 4;
+    // user1.numOfFollowers = 0;
+    // user1.avatar = 'kyle.png';
+    //
+    // user2.userId = 2;
+    // user2.username = 'harsheet';
+    // user2.numOfRepos = 10;
+    // user2.numOfFollowers = 2;
+    // user2.avatar = 'harsheet.png';
   }]);
