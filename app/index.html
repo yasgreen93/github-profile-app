@@ -10,8 +10,16 @@
   </head>
   <body>
     <div id="users" ng-controller="GithubProfileController as ctrl">
-      <ul ng-repeat="user in ctrl.users">
-        <li>Username: {{ user.username }}, Repositories: {{ user.numOfRepos }}, Followers: {{ user.numOfFollowers }}, Avatar: {{ user.avatar }}</li>
+      <input id="search-by-username" type="text" ng-model="search" placeholder="Search by username">
+      <ul ng-repeat="user in ctrl.users | filter:search">
+        <li>
+          <ul>
+            Avatar: {{ user.avatar }}
+            <li>{{ user.username }}</li>
+            <li>Repositories: {{ user.numOfRepos }}</li>
+            <li>Followers: {{ user.numOfFollowers }}</li>
+          </ul>
+        </li>
       </ul>
     </div>
   </body>

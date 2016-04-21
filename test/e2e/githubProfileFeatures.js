@@ -6,8 +6,16 @@ describe('Github Profile App', function() {
 
   it('displays a list of users', function() {
     browser.get('/');
-    var users = $$("#users ul li");
-    expect(users.first().getText()).toEqual("Username: kyle, Repositories: 10, Followers: 20, Avatar: kyle.jpg");
-    expect(users.last().getText()).toEqual("Username: harsheet, Repositories: 18, Followers: 23, Avatar: harsheet.jpg");
+    var users = $$("#users ul li ul");
+    expect(users.first().getText()).toMatch("Avatar: kyle.jpg\nkyle\nRepositories: 10\nFollowers: 20");
+    expect(users.last().getText()).toMatch("Avatar: harsheet.jpg\nharsheet\nRepositories: 18\nFollowers: 23");
+  });
+
+  it('searches user by username and returns the user', function() {
+    browser.get('/');
+    $("#search-by-username").sendKeys("kyle");
+    var users = $$("#users ul li ul");
+    expect(users.getText()).toMatch("Avatar: kyle.jpg\nkyle\nRepositories: 10\nFollowers: 20");
+    expect(users.getText()).not.toMatch("Avatar: harsheet.jpg\nharsheet\nRepositories: 18\nFollowers: 23");
   });
 });
